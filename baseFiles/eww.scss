@@ -1,0 +1,54 @@
+$surface-darkgrey: #20252b;
+$surface-fg: #949494;
+$surface-lightgrey: #3d464e;
+$surface-grey: #2b3238;
+$surface-red: #f87070;
+/* Palette */
+$base-orange: #F28123;
+$base-yellow: #F7F052;
+$base-red: #D34E24;
+$base-brown: #563F1B;
+$base-green: #38726C;
+$base-gray: #DFE0DF;
+$base-blue: #2F4858;
+$base-veige: #BBA89C;
+
+* { all: unset; }
+
+.layout-box {
+  font-family: NerdFont;
+  margin-left: 1em;
+  margin-right: 1em;
+  padding-left: 1em;
+  background-color: $surface-grey;
+  border-radius: 5px;
+  font-size:15px;
+  color: rgba($base-gray, 0.8);
+}
+
+.sidestuff{
+  padding-left: 10px;
+  padding-right: 10px;
+}
+
+.workspaces{
+	margin-right: 20px;
+}
+
+.ws-sq {
+    border-radius: 4px;
+    padding: 2px;
+    background-color: #666;
+    margin: 3px;
+    &.hidden {
+        background-color: $base-veige;
+    }
+    &.active {
+        background-color: $base-yellow;
+        margin: 0px;
+    }
+    &.current {
+        background-color: $base-orange;
+        margin: 0px;
+    }
+}

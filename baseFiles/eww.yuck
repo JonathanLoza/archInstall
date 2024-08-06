@@ -1,0 +1,80 @@
+
+(defpoll time :interval "1s"
+              :initial "initial-value"
+  `date +%H:%M:%S`)
+
+(defpoll date :interval "5s" `date +\"%A, %b %d\"`)
+
+
+(defwidget wg_time []
+ (box :halign "center" :orientation "horizontal"
+   (label :text {date + "  󱑁   " + time})
+ )
+)
+
+(defwidget wg_battery [ status battery]
+  (box :class "bat-box" :space-evenly false :spacing 8
+    (label :text "|")
+    (label :text {status == 'Charging' ? " " :
+     battery < 5 ? " 󰈅" :
+      battery < 10 ? " " :
+          battery < 30 ? " " :
+              battery < 55 ? " " :
+                battery < 75 ? " " :" "}
+    )
+    (label :text {" " + battery +"%"})
+  )
+)
+
+(defwidget sidestuff []
+  (box :class "sidestuff" :orientation "h" :space-evenly false :halign "end" :spacing 10
+    (box :orientation "h" :spacing 2 :space-evenly false :halign "end"
+     (wg_battery :status {EWW_BATTERY.BAT1.status} :battery {EWW_BATTERY.BAT1.capacity})
+    )
+  )
+)
+
+(deflisten ws_info :initial "{ \"0\": \"current active\" }"
+    `xprop -spy -root _XMONAD_LOG | stdbuf -o0 sed 's/_XMONAD_LOG(UTF8_STRING) = "\\(.*\\), "/{ \\1 }/' | stdbuf -o0 sed 's/\\\\//g'`
+)
+
+(defwidget ws [id]
+    (eventbox
+        (box :width 14
+            :class `ws-sq ${ws_info[id]} `
+        )
+    )
+)
+(defwidget wg_ws []
+    (box
+        :class "workspaces"
+        :halign "start"
+        :style "padding: 8px 0;"
+        :spacing 8
+        (ws :id 1)
+        (ws :id 2)
+        (ws :id 3)
+        (ws :id 4)
+        (ws :id 5)
+        (ws :id 6)
+        (ws :id 7)
+        (ws :id 8)
+        (ws :id 9)
+    )
+)
+
+
+(defwidget bar []
+  (centerbox :orientation "h" :class "layout-box"
+    (box :orientation "h" :space-evenly false (wg_ws) )
+    (box :orientation "h" :space-evenly false (wg_time))
+    (sidestuff)
+  )
+)
+
+(defwindow powermenu
+  :stacking "bg"
+  :windowtype "dock"
+  :wm-ignore true
+  :geometry (geometry :width "100%" :height "2%" :y 8)
+  (bar))

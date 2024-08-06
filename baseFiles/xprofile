@@ -1,0 +1,2 @@
+setxkbmap -layout latam
+#xautolock -time 10 -locker "systemctl suspend" -detectsleep -corners '-000' &
