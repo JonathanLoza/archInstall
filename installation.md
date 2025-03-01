@@ -48,6 +48,11 @@ Name=en*
 [Network]
 DHCP=yes
 
+if you get a dhcp error on iwctl, make the file /etc/iwd/main.conf with those 2 lines;
+
+[General]
+EnableNetworkConfiguration=true
+
 ## Install nvidia
 run nvidia.sh
 
