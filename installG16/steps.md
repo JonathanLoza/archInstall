@@ -6,7 +6,7 @@ Partition with cfdisk /dev/disk
 
 Format with mkfs.ext4 and mkfs.fat -F 32  
 
-Mount /mnt /mnt/home /mnt/boot  
+Mount: mount /dev/root_partition /mnt  and also /mnt/home /mnt/boot  
 
 Run preChroot.sh  
 
