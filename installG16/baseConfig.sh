@@ -38,4 +38,8 @@ echo -e "[General]\nEnableNetworkConfiguration=true" > /etc/iwd/main.conf
 refind-install --usedefault "$1"  --alldrivers
 mkrlconf
 
+passwd
+useradd -m -g users -G wheel,storage,power,video,audio -s /bin/bash jonathan
+passwd jonathan  
+EDITOR=vim visudo
 

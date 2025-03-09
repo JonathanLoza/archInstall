@@ -17,3 +17,5 @@ Run baseConfig.sh
 Modify /boot/refind_linux.conf , remove invalid entries
 
 Modify /boot/EFI/BOOT/refind and add your boot partition there
+
+exit and umount -R /mnt  
